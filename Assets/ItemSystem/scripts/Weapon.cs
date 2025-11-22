@@ -1,29 +1,17 @@
 using SteathyPineapple.ItemSystem;
 using UnityEngine;
 
-public class Weapon : ItemSystem, IHoldable
+public abstract class Weapon : ItemSystem
 {
     [Header("Combat Info")]
-    [SerializeField] private float baseDamage;
-
-    private void Update()
-    {
-        //on mouseClick use weapon
-
-
-        //start cooldowntimer
-        StartCoroutine(StartCoolDown());
-    }
+    [SerializeField] protected float baseDamage;
 
     public override void UseItem()
     {
-        
+        Attack();
+        StartCoroutine(StartCoolDown());
     }
 
-    public void Holdable()
-    {
-      //allows player to hold weapons when selected 
-    }
-
+    public abstract void Attack();
 
 }

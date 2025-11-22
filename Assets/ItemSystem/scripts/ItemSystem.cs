@@ -42,7 +42,7 @@ namespace SteathyPineapple.ItemSystem
        
         protected IEnumerator StartCoolDown()
         {
-            print("hello world!");
+            Debug.Log("cooldownstart" + this.itemName);
             isUsable = false;
             float waitTime = coolDownTime;
             while(waitTime > 0 && isUsable == false)
