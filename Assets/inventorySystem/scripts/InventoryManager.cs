@@ -1,18 +1,35 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using SteathyPineapple.ItemSystem;
 
-public class InventoryManager : MonoBehaviour
+namespace SteathyPineapple.InventorySystem
 {
-    [SerializeField] private GameObject inventoryMenu;
-    private bool menuActivated;
-
-
-    private void Update()
+    public class InventoryManager : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        [SerializeField] private GameObject inventoryMenu;
+        private bool menuActivated;
+        public ItemSlot[] itemSlot;
+
+
+        private void Update()
         {
-            menuActivated = !menuActivated;
-            inventoryMenu.SetActive(menuActivated);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                menuActivated = !menuActivated;
+                inventoryMenu.SetActive(menuActivated);
+            }
+        }
+        public void AddItem(string itemName)
+        {
+            for (int i = 0; i < itemSlot.Length; i++)
+            {
+                if (itemSlot[i].isFull == false)
+                {
+                    itemSlot[i].AddItem(itemName);
+                    return;
+                }
+            }
         }
     }
+   
 }

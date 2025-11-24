@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using SteathyPineapple.InventorySystem;
 
 namespace SteathyPineapple.ItemSystem
 {
@@ -24,11 +25,19 @@ namespace SteathyPineapple.ItemSystem
         [SerializeField] private float coolDownTime;
         //[SerializeField]
 
+
+       private InventoryManager inventoryManager;
         private void Update()
         {
+            
            if(Input.GetKeyDown(KeyCode.Q) && isUsable == true)
             {
                 UseItem();
+            }
+            
+            if(Input.GetKeyDown(KeyCode.Space)) //will replace this with on collision and purchased
+            {
+                Test();
             }
         }
         /// <summary>
@@ -54,5 +63,14 @@ namespace SteathyPineapple.ItemSystem
             yield break;
         }
 
+         private void Test()
+         {
+            if (inventoryManager == null)
+            { 
+                inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>(); 
+            }
+            inventoryManager.AddItem(itemName);
+            
+         }
     }
 }
