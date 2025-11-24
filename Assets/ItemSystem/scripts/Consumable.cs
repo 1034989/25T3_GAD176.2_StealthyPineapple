@@ -10,9 +10,9 @@ public class Consumable : ItemSystem
     [SerializeField] private int stackableMaxAmount;
     public int amountInInventory = 0;
 
-    [Header("Text Info")]
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private TextMeshProUGUI amountLeftText;
+    //[Header("Text Info")]
+    //[SerializeField] private TextMeshProUGUI itemNameText;
+    //[SerializeField] private TextMeshProUGUI amountLeftText;
     
 
    
@@ -48,8 +48,8 @@ public class Consumable : ItemSystem
 
     private void InfoUIUpdate()
     {
-        itemNameText.SetText(itemName);
-        amountLeftText.SetText("{0}", amountInInventory);
+        //itemNameText.SetText(itemName);
+        //amountLeftText.SetText("{0}", amountInInventory);
      
     }
 }
