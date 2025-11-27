@@ -14,5 +14,12 @@ namespace SteathyPineapple.ShopSystem
         //item discription
         //item BuyPrice
         public static ShopPopUp OnLookAtShopItem;
+
+
+        /// <summary>
+        /// this event closes shop when called
+        /// </summary>
+        public delegate void ShopClose();
+        public static ShopClose OnCloseShop;
     }
 }

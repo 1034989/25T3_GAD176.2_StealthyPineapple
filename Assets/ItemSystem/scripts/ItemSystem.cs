@@ -9,17 +9,14 @@ namespace SteathyPineapple.ItemSystem
     {
         [Tooltip("info that is displayed in inventory and shop")]
         [Header("Display Info")]
-        [SerializeField]  public string itemName;
+        public string itemName;
         [TextArea(5, 10)] //min 5 lines, max 10 lines before scroll bar
-        [SerializeField] private  string itemDiscription;
+        public string itemDiscription;
 
-       
         [Header("Value")]
-        [SerializeField] private int purchasePrice;
-        [SerializeField] private int sellingPrice;
+        public int purchasePrice;
+        public int sellingPrice;
 
-
-        
         [Header("CoolDown Varibles")]
         [SerializeField] private bool isUsable = true;
         [SerializeField] private float coolDownTime;
@@ -27,26 +24,11 @@ namespace SteathyPineapple.ItemSystem
 
         private void Update()
         {
-           if(Input.GetKeyDown(KeyCode.Q) && isUsable == true)
+            if (Input.GetKeyDown(KeyCode.Q) && isUsable == true)
             {
                 UseItem();
             }
-            //if(been hit by raycast)
-            {
-                //shopDisplay
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ShopDisplay();
-            }
         }
-
-        public void ShopDisplay()
-        {   
-                ShopEvents.OnLookAtShopItem?.Invoke(itemName, itemDiscription, purchasePrice);   
-        }
-        
-
         /// <summary>
         /// UseItem: overridable method since each child of this Class has a different type of "Use"
         /// </summary>
@@ -69,6 +51,5 @@ namespace SteathyPineapple.ItemSystem
             isUsable = true;
             yield break;
         }
-
     }
 }
