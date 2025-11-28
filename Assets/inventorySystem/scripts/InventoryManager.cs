@@ -19,17 +19,31 @@ namespace SteathyPineapple.InventorySystem
                 inventoryMenu.SetActive(menuActivated);
             }
         }
-        public void AddItem(string itemName)
+        public int AddItem(string itemName, int quantity, string itemDiscription,int maxQuantity)
         {
             for (int i = 0; i < itemSlot.Length; i++)
             {
-                if (itemSlot[i].isFull == false)
+                if (itemSlot[i].isFull == false && itemSlot[i].nameOfItem == itemName || itemSlot[i].stackAmount == 0)
                 {
-                    itemSlot[i].AddItem(itemName);
-                    return;
+                    int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemDiscription, maxQuantity);
+                    if (leftOverItems > 0)
+                    {
+                        leftOverItems = AddItem(itemName, leftOverItems, itemDiscription, maxQuantity);
+                    }
+                    return leftOverItems;
                 }
+            }
+            return quantity;
+        }
+        public void DeselectAllslots()
+        {
+            for (int i = 0; i < itemSlot.Length; i++)
+            {
+                itemSlot[i].selectShader.SetActive(false);
+                itemSlot[i].thisItemSelected = false;
             }
         }
     }
-   
+    
+    
 }
