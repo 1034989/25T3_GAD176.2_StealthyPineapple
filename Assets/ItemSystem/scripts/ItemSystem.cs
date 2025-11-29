@@ -38,7 +38,7 @@ namespace SteathyPineapple.ItemSystem
         
         private void Start()
         {
-            if (isStackable == false || maxQuantity > 1)
+            if (isStackable == false || maxQuantity < 1)
             {
                 //item is not stackable
                 maxQuantity = 1;

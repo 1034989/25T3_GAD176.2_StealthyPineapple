@@ -1177,9 +1177,9 @@ MonoBehaviour:
   sellingPrice: 1
   isUsable: 1
   coolDownTime: 0
-  isStackable: 0
+  isStackable: 1
   quantity: 1
-  maxQuantity: -1
+  maxQuantity: 22
   baseDamage: 0
   Projectile: {fileID: 0}
   projectileVelocity: 0
