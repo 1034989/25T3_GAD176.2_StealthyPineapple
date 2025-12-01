@@ -4,11 +4,11 @@ namespace SteathyPineapple.ShopSystem
 {
     public static class ShopEvents
     {
+        
         //if player is looking at an item in shop
-        /// then display UI
-        /// OnLookAtShopItem
-
-        public delegate void ShopPopUp(string itemName, string itemDiscription, int buyingPrice);
+        // then display UI
+        // OnLookAtShopItem
+        public delegate void ShopPopUp(string itemName, string itemDiscription, int purchasePrice, int quantity, int maxQuantity, int stockAmount);
         //access modifier
         //item name
         //item discription
@@ -21,5 +21,9 @@ namespace SteathyPineapple.ShopSystem
         /// </summary>
         public delegate void ShopClose();
         public static ShopClose OnCloseShop;
+
+        public delegate void ShopKeeperInventory();
+        public static ShopKeeperInventory OpenSellInventroy;
+
     }
 }

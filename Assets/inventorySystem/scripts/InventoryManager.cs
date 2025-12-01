@@ -17,18 +17,20 @@ namespace SteathyPineapple.InventorySystem
             {
                 menuActivated = !menuActivated;
                 inventoryMenu.SetActive(menuActivated);
+                //pause game
+                //make mouse visible
             }
         }
-        public int AddItem(string itemName, int quantity, string itemDiscription,int maxQuantity)
+        public int AddItem(string itemName, int quantity, string itemDiscription,int maxQuantity, int purchasePrice)
         {
             for (int i = 0; i < itemSlot.Length; i++)
             {
                 if (itemSlot[i].isFull == false && itemSlot[i].nameOfItem == itemName || itemSlot[i].stackAmount == 0)
                 {
-                    int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemDiscription, maxQuantity);
+                    int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemDiscription, maxQuantity, purchasePrice);
                     if (leftOverItems > 0)
                     {
-                        leftOverItems = AddItem(itemName, leftOverItems, itemDiscription, maxQuantity);
+                        leftOverItems = AddItem(itemName, leftOverItems, itemDiscription, maxQuantity, purchasePrice);
                     }
                     return leftOverItems;
                 }
