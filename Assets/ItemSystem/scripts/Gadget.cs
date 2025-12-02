@@ -2,7 +2,7 @@ using SteathyPineapple.ItemSystem;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public abstract class Gadget : ItemSystem, IHoldable
+public abstract class Gadget : Item, IHoldable
 {
     public override void UseItem()
     {
