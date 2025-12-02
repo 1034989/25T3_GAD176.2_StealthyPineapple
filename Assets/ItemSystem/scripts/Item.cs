@@ -9,8 +9,7 @@ using UnityEditor;
 
 namespace SteathyPineapple.ItemSystem
 {
-    
-    public abstract class ItemSystem : MonoBehaviour
+    public abstract class Item : MonoBehaviour
     {
         [Tooltip("info that is displayed in inventory and shop")]
         [Header("Display Info")]
