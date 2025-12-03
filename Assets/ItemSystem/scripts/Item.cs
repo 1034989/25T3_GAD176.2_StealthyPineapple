@@ -34,7 +34,7 @@ namespace SteathyPineapple.ItemSystem
       //[HideInInspector]
         public int quantity; //since i dont want anyone to use this hide in Inspector does what it says
         public int maxQuantity;
-        
+        private InventoryManager inventoryManager;
         private void Start()
         {
             if (isStackable == false || maxQuantity < 1)
@@ -43,12 +43,15 @@ namespace SteathyPineapple.ItemSystem
                 maxQuantity = 1;
                 //this sets the base item to be always cannot be stacked
             }
-            
+            if (inventoryManager == null)
+            {
+                inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+            }
         }
         private void Update()
         {
             
-           if(Input.GetKeyDown(KeyCode.Q) && isUsable == true)
+            if (Input.GetKeyDown(KeyCode.Q) && isUsable == true && inventoryManager.menuActivated == false)
             {
                 UseItem();
             }

@@ -7,7 +7,7 @@ namespace SteathyPineapple.InventorySystem
     public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private GameObject inventoryMenu;
-        private bool menuActivated;
+         public bool menuActivated;
         public ItemSlot[] itemSlot;
 
 
