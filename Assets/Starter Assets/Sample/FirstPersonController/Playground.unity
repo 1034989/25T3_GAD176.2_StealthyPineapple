@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 1223547188}
   - component: {fileID: 1223547193}
   - component: {fileID: 1223547194}
+  - component: {fileID: 1223547195}
   m_Layer: 0
   m_Name: Sentry
   m_TagString: Untagged
@@ -680,7 +681,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223547187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb8229a565d5c7440aa34fcd5daab14f, type: 3}
   m_Name: 
@@ -771,7 +772,7 @@ Transform:
   m_GameObject: {fileID: 1223547187}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.55, y: 0.92, z: 4.696882}
+  m_LocalPosition: {x: -5.55, y: 1.645, z: 4.696882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -811,12 +812,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223547187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79253255d01f13847b61aaffb9292405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SentryData: {fileID: 11400000, guid: 19c1ba67e433a0b40a60397cf4bd1c72, type: 2}
+--- !u!114 &1223547195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223547187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9bcc2fea8a8a014ba587aba38400323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroy: 0
+  CameraData: {fileID: 11400000, guid: ebc6cde841aba1b49aa8f18244167639, type: 2}
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0
