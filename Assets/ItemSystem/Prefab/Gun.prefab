@@ -128,11 +128,14 @@ MonoBehaviour:
   sellingPrice: 0
   isUsable: 1
   coolDownTime: 0
+  isStackable: 0
+  quantity: 0
+  maxQuantity: 0
   baseDamage: 1
-  Ammo: {fileID: 0}
+  Ammo: {fileID: 8473791837308154095, guid: 5ab20b0c9b2098b429ec3c2d73bb1fe0, type: 3}
   spawnPoint: {fileID: 5699360190316553566}
   timeAfterShot: 10
-  projectileVelocity: 1
+  projectileVelocity: 500
 --- !u!1 &6542393658624798844
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 6542393658624798844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.447}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
