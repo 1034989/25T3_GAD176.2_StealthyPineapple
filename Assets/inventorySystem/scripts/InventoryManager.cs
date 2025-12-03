@@ -17,14 +17,21 @@ namespace SteathyPineapple.InventorySystem
             {
                 menuActivated = !menuActivated;
                 inventoryMenu.SetActive(menuActivated);
+                
                 if (menuActivated == true)
                 {
                     Time.timeScale = 0.0f;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+
+
                     Debug.Log("timeScale is: " + Time.timeScale + " this means the game is paused when in inventory");
                 }
                 else
                 {
                     Time.timeScale = 1.0f;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                     Debug.Log("timeScale is: " + Time.timeScale + " this means the game is unpaused when in game");
                 }
             }

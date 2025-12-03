@@ -124,13 +124,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Gun
   itemDiscription: pew pew
-  buyingPrice: 100
-  sellingPrice: 0
+  purchasePrice: 100
+  sellingPrice: 1
   isUsable: 1
   coolDownTime: 0
   isStackable: 0
   quantity: 0
   maxQuantity: 0
+  maxStock: 1
+  stockAmount: 1
   baseDamage: 1
   Ammo: {fileID: 8473791837308154095, guid: 5ab20b0c9b2098b429ec3c2d73bb1fe0, type: 3}
   spawnPoint: {fileID: 5699360190316553566}
