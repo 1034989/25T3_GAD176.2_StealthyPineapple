@@ -4,7 +4,7 @@ using TMPro;
 using SteathyPineapple.ItemSystem;
 
 
-public class Consumable : ItemSystem
+public class Consumable : Item
 {
     [Header("In Inventory")]
     [SerializeField] private int stackableMaxAmount;

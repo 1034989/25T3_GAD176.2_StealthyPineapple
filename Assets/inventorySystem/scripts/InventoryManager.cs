@@ -7,7 +7,7 @@ namespace SteathyPineapple.InventorySystem
     public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private GameObject inventoryMenu;
-        private bool menuActivated;
+         public bool menuActivated;
         public ItemSlot[] itemSlot;
 
 
@@ -17,8 +17,16 @@ namespace SteathyPineapple.InventorySystem
             {
                 menuActivated = !menuActivated;
                 inventoryMenu.SetActive(menuActivated);
-                //pause game
-                //make mouse visible
+                if (menuActivated == true)
+                {
+                    Time.timeScale = 0.0f;
+                    Debug.Log("timeScale is: " + Time.timeScale + " this means the game is paused when in inventory");
+                }
+                else
+                {
+                    Time.timeScale = 1.0f;
+                    Debug.Log("timeScale is: " + Time.timeScale + " this means the game is unpaused when in game");
+                }
             }
         }
         public int AddItem(string itemName, int quantity, string itemDiscription,int maxQuantity, int purchasePrice)

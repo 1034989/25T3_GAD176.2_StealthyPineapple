@@ -11,8 +11,7 @@ using UnityEditor.Search;
 
 namespace SteathyPineapple.ItemSystem
 {
-
-    public abstract class ItemSystem : MonoBehaviour
+    public abstract class Item : MonoBehaviour
     {
         [Tooltip("info that is displayed in inventory and shop")]
         [Header("Display Info")]
@@ -39,6 +38,7 @@ namespace SteathyPineapple.ItemSystem
         [SerializeField]private int maxStock;
         public int stockAmount;
         
+        private InventoryManager inventoryManager;
         private void Start()
         {
             if (isStackable == false || maxQuantity < 1)
@@ -47,11 +47,14 @@ namespace SteathyPineapple.ItemSystem
                 maxQuantity = 1;
                 //this sets the base item to be always cannot be stacked
             }
-            
+            if (inventoryManager == null)
+            {
+                inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+            }
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Q) && isUsable == true)
+            if (Input.GetKeyDown(KeyCode.Q) && isUsable == true && inventoryManager.menuActivated == false)
             {
                 UseItem();
             }
