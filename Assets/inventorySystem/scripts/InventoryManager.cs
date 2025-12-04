@@ -17,28 +17,35 @@ namespace SteathyPineapple.InventorySystem
             {
                 menuActivated = !menuActivated;
                 inventoryMenu.SetActive(menuActivated);
+                
                 if (menuActivated == true)
                 {
                     Time.timeScale = 0.0f;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+
+
                     Debug.Log("timeScale is: " + Time.timeScale + " this means the game is paused when in inventory");
                 }
                 else
                 {
                     Time.timeScale = 1.0f;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                     Debug.Log("timeScale is: " + Time.timeScale + " this means the game is unpaused when in game");
                 }
             }
         }
-        public int AddItem(string itemName, int quantity, string itemDiscription,int maxQuantity)
+        public int AddItem(string itemName, int quantity, string itemDiscription,int maxQuantity, int purchasePrice)
         {
             for (int i = 0; i < itemSlot.Length; i++)
             {
                 if (itemSlot[i].isFull == false && itemSlot[i].nameOfItem == itemName || itemSlot[i].stackAmount == 0)
                 {
-                    int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemDiscription, maxQuantity);
+                    int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemDiscription, maxQuantity, purchasePrice);
                     if (leftOverItems > 0)
                     {
-                        leftOverItems = AddItem(itemName, leftOverItems, itemDiscription, maxQuantity);
+                        leftOverItems = AddItem(itemName, leftOverItems, itemDiscription, maxQuantity, purchasePrice);
                     }
                     return leftOverItems;
                 }

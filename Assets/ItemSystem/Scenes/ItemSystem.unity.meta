@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ShopSystem/New Scene.unity.meta
+guid: e1bf2cfb354dc60438ed829e4a19604a
+========
 guid: 5997032d289b49a408dea25dedb7231f
+>>>>>>>> develop:Assets/ItemSystem/Scenes/ItemSystem.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

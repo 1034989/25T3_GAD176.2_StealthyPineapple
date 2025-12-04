@@ -3,6 +3,7 @@ using SteathyPineapple.ItemSystem;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.ReorderableList;
+using UnityEditor.Purchasing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public string descriptionOfItem;
     public int stackAmount;
     public bool isFull;
+    private float sellingPrice;
     
 
     [SerializeField] private int maxAmountOfItemsInStack;
@@ -28,6 +30,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] TextMeshProUGUI stackAmountText;
     [SerializeField] TextMeshProUGUI itemInfoNameText;
     [SerializeField] TextMeshProUGUI itemInfoDescriptionText;
+    [SerializeField] TextMeshProUGUI sellingPriceInformation;
 
     [Header("selection")]
     public GameObject selectShader;
@@ -37,8 +40,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
       inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
-    public int AddItem(string itemName, int quantity, string itemDiscription, int maxQuantity)
-    {
+    public int AddItem(string itemName, int quantity, string itemDiscription, int maxQuantity, int purchasePrice)
+    { 
         //check to see if the slot is already full
         if (isFull)
         {
@@ -73,6 +76,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             stackAmountText.gameObject.SetActive(true);
         }
         return 0;
+        
     }
     public void OnPointerClick(PointerEventData eventData)
     {
