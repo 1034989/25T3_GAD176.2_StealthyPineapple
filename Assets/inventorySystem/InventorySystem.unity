@@ -1181,7 +1181,9 @@ MonoBehaviour:
   quantity: 1
   maxQuantity: 22
   baseDamage: 0
-  Projectile: {fileID: 0}
+  Ammo: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  timeAfterShot: 0
   projectileVelocity: 0
 --- !u!65 &1533946900
 BoxCollider:
@@ -2263,6 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryMenu: {fileID: 1297443182405591626}
+  menuActivated: 0
   itemSlot:
   - {fileID: 916955601}
   - {fileID: 1287921605}
