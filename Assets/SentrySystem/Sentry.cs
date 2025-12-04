@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Sentry : MonoBehaviour
 {
-    private Transform player; //this is the player info
+    public Transform player; //this is the player info
+
     private float howClose = 10f; //how close you can get to sentry before shooting 
     private bool isDestroy = false;
     private float distancetoplayer; //how far the player is to the sentry
 
     public SentryData SentryData;
+    public PlayerHealth playerHealth; //just for testing
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,10 +23,10 @@ public class Sentry : MonoBehaviour
     {
         if (Time.time >= SentryData.nextFireTime)
         {
-            if(distancetoplayer <= howClose) //if it less than 5 meters it will shoot
+            if(distancetoplayer <= howClose) //if it less than 10 meters it will shoot
             {
                 Shoot();
-                SentryData.nextFireTime = Time.time + SentryData.fireRate;
+                SentryData.nextFireTime = Time.time + SentryData.fireRate; //there will a delay of shooting so it wont kill player instanty
             }
         }
         
@@ -36,16 +38,21 @@ public class Sentry : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         RaycastHit hit;
+
+        Debug.DrawRay(transform.position, transform.forward * 100f, Color.red); //draw a line of the raycast 
+
         //The original position of the sentry, the direction, checking if its hit something, attackdistance
         if (Physics.Raycast (transform.position, transform.forward, out hit, SentryData.shootRange))
         {
-            //playerHealth -= SentryData.sentryDamage; this is fix this later when i get the player hp code
-            Debug.Log("Sentry hit player" + hit.collider.gameObject.name); //saying what hit and name the gameobject
+            if (hit.collider.CompareTag("Player"))//ensure it hit player
+            {
+                Debug.Log("Sentry hit player" + playerHealth.playerHP); //saying what hit and name the gameobject  
+                playerHealth.playerHP -= SentryData.sentryDamage; //this is fix this later when i get the player hp code
+            }
         }
-         Debug.DrawRay(transform.position, transform.forward * 100f, Color.red); //draw a line of the raycast 
     }
 
     private void DamageTaken() //sentry taken damaged somehow 

@@ -3,8 +3,8 @@ using UnityEngine;
 public class SecurityCamera : MonoBehaviour
 {   
     public bool isDestroy = false; 
-    private bool playerDetected = false;
-    private Transform player; 
+
+    public Transform player; 
 
     public CameraData CameraData;
 
@@ -18,28 +18,24 @@ public class SecurityCamera : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, CameraData.turningCameraSpeed * Time.deltaTime, 0); //you spin me right round, baby, right round, like a record baby, right round
-        if (playerDetected = true)
-        {
-            playerIsVisible();
-        }
     }
-    private void playerIsVisible()
+    
+    private void OntriggerStay(Collider other)
     {
-        RaycastHit hit;
-        //Original position of camera, facing forward, making sure it hit something, camera range
-        if (Physics.Raycast (transform.position, transform.forward, out hit, CameraData.cameraDetectionRange))
+        if (other.CompareTag("Player"))
         {
-            if (hit.transform == player) //confirm if its a player 
+            RaycastHit hit;
+            //Original position of camera, facing forward, making sure it hit something, camera range
+            if (Physics.Raycast (transform.position, transform.forward, out hit, CameraData.cameraDetectionRange))
             {
-                playerDetected = true;
-                //add the event here to alert the enemy
-                Debug.Log("Player have been detected, now alerting enemies");
-            }
-            else
-            {
-                playerDetected = false;
+                if (hit.transform == player) //confirm if its a player 
+                {
+                    //add the event here to alert the enemy
+                    Debug.Log("Player have been detected, now alerting enemies");
+                }
             }
         }
+       
     }
 
 
