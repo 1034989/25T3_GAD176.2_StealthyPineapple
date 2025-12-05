@@ -5,7 +5,6 @@ public class Sentry : MonoBehaviour
     public Transform player; //this is the player info
 
     private float howClose = 10f; //how close you can get to sentry before shooting 
-    private bool isDestroy = false;
     private float distancetoplayer; //how far the player is to the sentry
 
     public SentryData SentryData;
@@ -21,14 +20,15 @@ public class Sentry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= SentryData.nextFireTime)
-        {
-            if(distancetoplayer <= howClose) //if it less than 10 meters it will shoot
-            {
-                Shoot();
-                SentryData.nextFireTime = Time.time + SentryData.fireRate; //there will a delay of shooting so it wont kill player instanty
-            }
-        }
+        // Debug.DrawRay (transform.position, transform.forward * 100f, Color.red, false); //draw a line of the raycast 
+        // if (Time.time >= SentryData.nextFireTime)
+        // {
+        //     if(distancetoplayer <= howClose) //if it less than 10 meters it will shoot
+        //     {
+        //         Shoot();
+        //         SentryData.nextFireTime = Time.time + SentryData.fireRate; //there will a delay of shooting so it wont kill player instanty
+        //     }
+        // }
         
         distancetoplayer = Vector3.Distance(player.position, transform.position); //distance between the player and enemy (player distance, enemy distance)
         
@@ -40,19 +40,19 @@ public class Sentry : MonoBehaviour
 
     public void Shoot()
     {
-        RaycastHit hit;
+        // RaycastHit hit;
 
-        Debug.DrawRay(transform.position, transform.forward * 100f, Color.red); //draw a line of the raycast 
+        // Debug.DrawRay(transform.position, transform.forward * 100f, Color.red); //draw a line of the raycast 
 
-        //The original position of the sentry, the direction, checking if its hit something, attackdistance
-        if (Physics.Raycast (transform.position, transform.forward, out hit, SentryData.shootRange))
-        {
-            if (hit.collider.CompareTag("Player"))//ensure it hit player
-            {
-                Debug.Log("Sentry hit player" + playerHealth.playerHP); //saying what hit and name the gameobject  
-                playerHealth.playerHP -= SentryData.sentryDamage; //this is fix this later when i get the player hp code
-            }
-        }
+        // //The original position of the sentry, the direction, checking if its hit something, attackdistance
+        // if (Physics.Raycast (transform.position, transform.forward, out hit, SentryData.shootRange))
+        // {
+        //     if (hit.collider.CompareTag("Player"))//ensure it hit player
+        //     {
+        //         Debug.Log("Sentry hit player" + playerHealth.playerHP); //saying what hit and name the gameobject  
+        //         playerHealth.playerHP -= SentryData.sentryDamage; //this is fix this later when i get the player hp code
+        //     }
+        // }
     }
 
     private void DamageTaken() //sentry taken damaged somehow 
