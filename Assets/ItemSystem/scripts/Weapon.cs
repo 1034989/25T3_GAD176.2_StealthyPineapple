@@ -9,9 +9,8 @@ public abstract class Weapon : Item
     public override void UseItem()
     {
         Attack();
-        StartCoroutine(StartCoolDown());
+        StartCoroutine(StartCoolDown()); //starts a cooldown within the item script
     }
 
-    public abstract void Attack();
-
+    public abstract void Attack(); //this get override by the weapons when they are used as they have thier own set attack style
 }

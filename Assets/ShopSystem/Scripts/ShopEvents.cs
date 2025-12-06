@@ -9,10 +9,12 @@ namespace SteathyPineapple.ShopSystem
         // then display UI
         // OnLookAtShopItem
         public delegate void ShopPopUp(string itemName, string itemDiscription, int purchasePrice, int quantity, int maxQuantity, int stockAmount);
-        //access modifier
-        //item name
-        //item discription
-        //item BuyPrice
+        /// modifier to access
+        ///item name
+        ///item discription
+        ///item BuyPrice
+        ///quantity
+        ///max amount
         public static ShopPopUp OnLookAtShopItem;
 
 
