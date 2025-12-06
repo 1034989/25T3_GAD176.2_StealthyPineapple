@@ -16,7 +16,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public string descriptionOfItem;
     public int stackAmount;
     public bool isFull;
-    private float sellingPrice;
+    private float sellingPrice; // this was never used as i didnt have a chance to set a sell system with the shopKeeper. as it wouldnt of met any of the LO
     
 
     [SerializeField] private int maxAmountOfItemsInStack;
@@ -44,29 +44,31 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     { 
         //check to see if the slot is already full
         if (isFull)
-        {
+        {//this will carrys over the remaining amount and will be processed back to inventory manager and find a new slot to be put into 
             return quantity;
         }
         //Update item Name
         nameOfItem = itemName;
+        //display the name of item in the slots saying i have this item in inventory
         itemNameText.text = nameOfItem;
+        //toggle the text on so its visible
         itemNameText.gameObject.SetActive(true);
+        
+        //this is just setting the game object information so when it is selected later it will display this information
         descriptionOfItem = itemDiscription;
 
-        //Update Quantity 
-       
+        //Update Quantity amount
         stackAmount += quantity;
         Debug.Log(stackAmount);
         if (stackAmount >= maxQuantity)
         {
-          
+          //if the amount is full it will set the max amount, and toggle isFull which will lock off that slot till it is reduced or emptied
             stackAmountText.text = maxQuantity.ToString();
             stackAmountText.gameObject.SetActive(true);
             isFull = true;
             Debug.Log("full");
 
             //return the LEFTOVERS
-            
             stackAmount = maxQuantity;
         }
         //update quantity text
@@ -79,7 +81,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         
     }
     public void OnPointerClick(PointerEventData eventData)
-    {
+    {//checks when the object is clicked with the left mouse input
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             OnLeftClick();
@@ -88,20 +90,22 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public void OnLeftClick()
     {
 
-        if (thisItemSelected)
+        if (thisItemSelected) //if the slot is already selected use item
         {
-            //inventoryManager.UseItem(); 
-            //need to make it that the item can be used when clicked on
+            ///inventoryManager.UseItem(); 
+            ///need to make it that the item can be used when clicked on
+            ///when a slot is clicked it will decrease the value of the item, but will not use the items ability,
+            ///this was not added as it wouldnt of met any LO and would of taken too much time to process
             stackAmount -= 1;
             stackAmountText.text = stackAmount.ToString();
             if (stackAmount <= 0)
-            {
+            {// if the item is 0 then remove the item from the slot freeing it up so a new item can fill its place
                 EmptySlot();
                 stackAmount = 0;
             }
         }
         else
-        {
+        {   //when panel is selected it will deselect the old panel and display the item information of the item
             inventoryManager.DeselectAllslots();
             selectShader.SetActive(true);
             thisItemSelected = true;
@@ -111,7 +115,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     }
    
     private void EmptySlot()
-    {
+    {// if there is no more items in slot set all to default and make it empty
         itemNameText.gameObject.SetActive(false);
         stackAmountText.gameObject.SetActive(false);
 

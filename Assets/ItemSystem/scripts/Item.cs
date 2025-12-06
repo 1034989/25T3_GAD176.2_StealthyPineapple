@@ -43,26 +43,27 @@ namespace SteathyPineapple.ItemSystem
         {
             if (isStackable == false || maxQuantity < 1)
             {
-                //item is not stackable
+                //if item is not stackable or if item doent have a max amount alway set it to 1 
                 maxQuantity = 1;
                 //this sets the base item to be always cannot be stacked
             }
             if (inventoryManager == null)
             {
                 inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
-            }
+            } 
         }
         private void Update()
         {
+            //checks if when key is pressed and inventory is NOT open to be able to use items like weapons 
             if (Input.GetKeyDown(KeyCode.Q) && isUsable == true && inventoryManager.menuActivated == false)
             {
                 UseItem();
             }
             
-            if(Input.GetKeyDown(KeyCode.P)) //will replace this with on collision and purchased
+           /* if(Input.GetKeyDown(KeyCode.P)) //will replace this with on collision and purchased
             {
                // Test();
-            }
+            }*/
         }
         /// <summary>
         /// UseItem: overridable method since each child of this Class has a different type of "Use"
@@ -72,9 +73,12 @@ namespace SteathyPineapple.ItemSystem
         /// <summary>
         /// StartCoolDown: timer/Countdown used when a item has been used, prevents items from being used rapidly.
         /// </summary>
-       
         protected IEnumerator StartCoolDown()
         {
+            ///when item is used it will start cooldown
+            /// updates bool to say its been used
+            /// wait till the wait time is 0
+            /// then activate the item to be able to be used again
             Debug.Log("cooldownstart" + this.itemName);
             isUsable = false;
             float waitTime = coolDownTime;
