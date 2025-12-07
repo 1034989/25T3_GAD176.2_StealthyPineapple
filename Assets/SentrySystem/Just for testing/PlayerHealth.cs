@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
     //This is simply for testing, feel free to delete this script, replace it if your own player script
     public SentryData SentryData;
     public Sentry sentry;
+    public SentryShoot sentryShoot;
 
     //Its unique Scripts
     public float playerHP = 100f; //Health
@@ -19,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage()
     {
-        sentry.Shoot();
+        sentryShoot.SentryShot();
     }
 
 }

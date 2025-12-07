@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Sentry
   m_EditorClassIdentifier: 
   sentryMoveSpeed: 5
-  shootRange: 1
+  shootRange: 10
   fireRate: 5
   sentryDamage: 40
-  nextFireTime: 51.281376
+  nextFireTime: 13.002944
   maxHealth: 100
   currentHealth: 100
   sentryHealth: 100

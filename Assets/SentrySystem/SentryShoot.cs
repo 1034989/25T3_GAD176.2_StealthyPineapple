@@ -21,13 +21,13 @@ public class SentryShoot : MonoBehaviour
         {
             if(distancetoplayer <= howClose) //if it less than 10 meters it will shoot
             {
-                Shoot();
+                SentryShot();
                 SentryData.nextFireTime = Time.time + SentryData.fireRate; //there will a delay of shooting so it wont kill player instanty
             }
         }
     }
 
-    public void Shoot()
+    public void SentryShot()
     {
         RaycastHit hit;
 

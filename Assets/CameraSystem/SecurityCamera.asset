@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74dcb5e1b165ea41b8e4e5709d85c34, type: 3}
   m_Name: SecurityCamera
   m_EditorClassIdentifier: 
-  cameraDetectionRange: 100
+  cameraDetectionRange: 5
   turningCameraSpeed: 50
+  minimumCameraAngle: -50
+  maxCameraAngle: 50
