@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - ShopSelection
   - Shopkeeper
+  - canPickUp
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - POI
   - Water
   - UI
-  - 
+  - holdLayer
   - 
   - 
   - 
