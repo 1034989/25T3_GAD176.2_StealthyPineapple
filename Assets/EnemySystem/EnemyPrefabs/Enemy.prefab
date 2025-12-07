@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 503353707068103751}
   - component: {fileID: 5872400821490199132}
   - component: {fileID: 7752390758587004611}
-  - component: {fileID: 822517788307394793}
+  - component: {fileID: 806841343319481493}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -136,7 +136,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &822517788307394793
+--- !u!114 &806841343319481493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,11 +145,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1974909891528260255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d92a80ff27f674981c754235a9c943, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aca77ae46b535f46864f4590ec35995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointofInterest: {fileID: 0}
-  FollowRange: 30
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wayPoint: {x: 0, y: 0, z: 0}
+  wayPointRange: 20
+  timeBetweenAttacks: 4
+  projectile: {fileID: 5060095451482756012, guid: 4d9b44d113b05ca4b9d85faf94c916a5, type: 3}
+  lifetime: 5
+  sightRange: 10
+  attackRange: 5
+  playerInSightRange: 0
+  playerInAttackRange: 0
 --- !u!1 &5109758637002664615
 GameObject:
   m_ObjectHideFlags: 0
