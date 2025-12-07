@@ -10,4 +10,6 @@ public class Potion : Consumable
         Debug.Log("i have drunk potion");
     }
 }
-
+/// Dev note
+/// this script is in place for others to expand on if they need, this can be branched out to other child classes if need
+///for example Healing, Strenght, invisiblity ect. 

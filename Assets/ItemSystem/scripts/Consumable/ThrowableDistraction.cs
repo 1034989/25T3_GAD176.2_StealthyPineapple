@@ -18,3 +18,7 @@ public class ThrowableDistraction : Consumable
         //if no: lands and causes distraction for enemy
     }
 }
+/// Dev note
+/// this script is in place for others to expand on if they need, this can be branched out to other child classes if need
+///    
+/// was going to start some throwables but someone else was going to implement this part
