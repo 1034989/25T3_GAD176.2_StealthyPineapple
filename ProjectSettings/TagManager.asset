@@ -5,16 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - CinemachineTarget
-<<<<<<< HEAD
-<<<<<<< HEAD
   - ShopSelection
   - Shopkeeper
-=======
   - canPickUp
->>>>>>> 78f6673 (Grab/Throw Command for Mission Complete)
-=======
-  - canPickUp
->>>>>>> origin/feature/mission-system
   layers:
   - Default
   - TransparentFX
