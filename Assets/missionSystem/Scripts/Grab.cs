@@ -14,7 +14,7 @@ namespace SteathyPineapple.MissionSystem
         [SerializeField] private bool canDrop = true; // boolean that makes sure the item isnt dropped or thrown when rotating it
         [SerializeField] private int LayerNumber; // Layer Index
         public float continuousAcceleration = 0f; // I could achieve acceleration by reducing and increasing drag in the inspector but that doesnt tick off my LO's, this F**ING does.
-
+        
         void Start()
         {
             LayerNumber = LayerMask.NameToLayer("holdLayer"); // Helps make sure item doesn't clip
@@ -70,7 +70,7 @@ namespace SteathyPineapple.MissionSystem
                 // disables physics
                 heldObjRb.isKinematic = true;
 
-                // stop the object  going through wall
+                // stop the object  going through wall (THIS FAILED BTW THANK YOU YOUTUBE)
                 heldObjRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
                 // Set layer so it doesn't collide with player
@@ -97,7 +97,7 @@ namespace SteathyPineapple.MissionSystem
             // Do NOT set rotation here, as RotateObject handles it. and the object bugs out for some reason??
         }
 
-        void RotateObject()
+        void RotateObject() // NOT EVEN SURE IF THIS STILL WORKS
         {
             if (Input.GetKey(KeyCode.R))// R key is for manual rotate
             {
@@ -113,12 +113,13 @@ namespace SteathyPineapple.MissionSystem
                 // Tilt up or down 
                 Quaternion pitchRotation = Quaternion.AngleAxis(-mouseY, heldObj.transform.right);
 
+                /// so like, pitch and yaw are the rotational axis on the horizontal and veritical axis, isnt that amazing? truely something huh
                 // Apply new rotation to existing rotation
                 heldObj.transform.localRotation = yawRotation * pitchRotation * heldObj.transform.localRotation;
             }
             else
             {
-               
+
                 // Resets object orientation to match the camera/hold position, ensuring stability.
                 heldObj.transform.rotation = holdPos.transform.rotation;
 
@@ -128,15 +129,32 @@ namespace SteathyPineapple.MissionSystem
 
         void ThrowObject()
         {
-            Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
+            
+
+            
+            Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false); // Re-enable collision between object and the player gameobject.
+            // Reset object 
             heldObj.layer = 0;
+            // physics engine 
             heldObjRb.isKinematic = false;
+            // Detach the object
             heldObj.transform.parent = null;
+            
+            IThrowable throwableBehavior = heldObj.GetComponent<IThrowable>(); // Implentmenting OCP, not that i will use it
 
-            heldObjRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
-
+            if (throwableBehavior != null)
+            {
+               
+                throwableBehavior.OnThrown(heldObjRb, transform.forward, throwForce); // throwing logic
+            }
+            else
+            {
+                heldObjRb.AddForce(transform.forward * throwForce, ForceMode.Impulse); // immediate velocity
+            }
+           
             if (continuousAcceleration > 0)
             {
+                //constant forward acceleration 
                 heldObjRb.AddForce(transform.forward * continuousAcceleration, ForceMode.Acceleration);
             }
             heldObj = null;
@@ -153,6 +171,11 @@ namespace SteathyPineapple.MissionSystem
             {
                 heldObj.transform.position = hit.point - transform.forward * 0.2f;
             }
+        }
+
+        public interface IThrowable // un-used OCP example
+        {
+            void OnThrown(Rigidbody rb, Vector3 throwDirection, float throwForce); //Every throw must have this
         }
     }
 }
