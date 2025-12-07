@@ -17,20 +17,17 @@ namespace SteathyPineapple.MissionSystem
         void Start()
         {
             LayerNumber = LayerMask.NameToLayer("holdLayer"); // Helps make sure item doesn't clip
-
-       
         }
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.E)) //Pick-up key
             {
-                if (heldObj == null) //if  not holding anything
+                if (heldObj == null) //if not holding anything
                 {
-                    
                     RaycastHit hit; // Is the player looking at anything?
                     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
                     {
-                        
                         if (hit.transform.gameObject.tag == "canPickUp") //Item needs to have this tag to be pickupable
                         {
                             PickUpObject(hit.transform.gameObject);
@@ -46,18 +43,20 @@ namespace SteathyPineapple.MissionSystem
                     }
                 }
             }
+
             if (heldObj != null) //if player is holding object
             {
                 MoveObject(); //keep object position at holdPos
                 RotateObject(); // Rotates object
+
                 if (Input.GetKeyDown(KeyCode.Mouse0) && canDrop == true) //Mous0 = left mouse click this is used to throw
                 {
                     StopClipping();
                     ThrowObject(); // Throw Object
                 }
-
             }
         }
+
         void PickUpObject(GameObject pickUpObj)
         {
             if (pickUpObj.GetComponent<Rigidbody>()) // make sure the object has a RigidBody otherwise it isnt a solid object
@@ -65,48 +64,63 @@ namespace SteathyPineapple.MissionSystem
                 heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast 
                 heldObjRb = pickUpObj.GetComponent<Rigidbody>(); // give Rigidbody
                 heldObjRb.isKinematic = true;
-                heldObjRb.transform.parent = holdPos.transform; //parent object to holdposition
+
+                
+
                 heldObj.layer = LayerNumber; //change the object layer to the holdLayer
-                                             //make sure object doesnt collide with player, it can cause weird bugs
+                //make sure object doesnt collide with player, it can cause weird bugs
                 Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
             }
         }
+
         void DropObject()
         {
             //re-enable collision with player
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
             heldObj.layer = 0; //object assigned back to default layer
             heldObjRb.isKinematic = false;
-            heldObj.transform.parent = null; //unparent object
+            heldObj.transform.parent = null; //unparent object 
             heldObj = null; //undefine game object
         }
+
         void MoveObject()
         {
             //keep object position the same as the holdPosition position
             heldObj.transform.position = holdPos.transform.position;
+            // NOTE: Do NOT set rotation here, as RotateObject handles it.
         }
+
         void RotateObject()
         {
-            if (Input.GetKey(KeyCode.R))// R key is for rotate
+            if (Input.GetKey(KeyCode.R))// R key is for manual rotate
             {
-                canDrop = false; //make sure throwing can't occur during rotating
+                canDrop = false;
 
-       
+                // rotation logic
+                float mouseX = Input.GetAxis("Mouse X") * rotationSensitivity;
+                float mouseY = Input.GetAxis("Mouse Y") * rotationSensitivity;
 
-                float XaxisRotation = Input.GetAxis("Mouse X") * rotationSensitivity; // Rotate on X-Axis
-                float YaxisRotation = Input.GetAxis("Mouse Y") * rotationSensitivity; // Rotate on Y-Axis
+                // Spin left or right 
+                Quaternion yawRotation = Quaternion.AngleAxis(-mouseX, heldObj.transform.up);
 
-                heldObj.transform.Rotate(Vector3.down, XaxisRotation); // Rotate on X-Axis
-                heldObj.transform.Rotate(Vector3.right, YaxisRotation); // Rotate on Y-Axis
+                // Tilt up or down 
+                Quaternion pitchRotation = Quaternion.AngleAxis(-mouseY, heldObj.transform.right);
+
+                // Apply new rotation to existing rotation
+                heldObj.transform.localRotation = yawRotation * pitchRotation * heldObj.transform.localRotation;
             }
             else
             {
+               
+                // Resets object orientation to match the camera/hold position, ensuring stability.
+                heldObj.transform.rotation = holdPos.transform.rotation;
+
                 canDrop = true;
             }
         }
+
         void ThrowObject() // Literally the drop function but add force.
         {
-            
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
             heldObj.layer = 0;
             heldObjRb.isKinematic = false;
@@ -114,7 +128,8 @@ namespace SteathyPineapple.MissionSystem
             heldObjRb.AddForce(transform.forward * throwForce);
             heldObj = null;
         }
-        void StopClipping()
+
+        void StopClipping() // Ironically this function doesnt get used cause the tutorial i followed used an older vers of unity
         {
             if (heldObj == null) return;
 
@@ -128,4 +143,3 @@ namespace SteathyPineapple.MissionSystem
         }
     }
 }
-
