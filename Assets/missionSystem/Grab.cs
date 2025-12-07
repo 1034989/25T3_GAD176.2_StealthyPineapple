@@ -8,11 +8,12 @@ namespace SteathyPineapple.MissionSystem
         public Transform holdPos; // Position where the item is held
         public float throwForce = 500f; //How much force is applied to item when thrown
         public float pickUpRange = 5f; // Pick up radius
-        private float rotationSensitivity = 1f; // How sensitive the items rotation is
-        private GameObject heldObj; // Selected Object
-        private Rigidbody heldObjRb; // Selected Object Rigidbody
-        private bool canDrop = true; // boolean that makes sure the item isnt dropped or thrown when rotating it
-        private int LayerNumber; // Layer Index
+        [SerializeField] private float rotationSensitivity = 1f; // How sensitive the items rotation is
+        [SerializeField] private GameObject heldObj; // Selected Object
+        [SerializeField] private Rigidbody heldObjRb; // Selected Object Rigidbody
+        [SerializeField] private bool canDrop = true; // boolean that makes sure the item isnt dropped or thrown when rotating it
+        [SerializeField] private int LayerNumber; // Layer Index
+        public float continuousAcceleration = 0f; // I could achieve acceleration by reducing and increasing drag in the inspector but that doesnt tick off my LO's, this F**ING does.
 
         void Start()
         {
@@ -51,7 +52,7 @@ namespace SteathyPineapple.MissionSystem
 
                 if (Input.GetKeyDown(KeyCode.Mouse0) && canDrop == true) //Mous0 = left mouse click this is used to throw
                 {
-                    StopClipping();
+                    StopClipping(); // IGNORE; THIS DOESNT GET USED
                     ThrowObject(); // Throw Object
                 }
             }
@@ -59,16 +60,22 @@ namespace SteathyPineapple.MissionSystem
 
         void PickUpObject(GameObject pickUpObj)
         {
-            if (pickUpObj.GetComponent<Rigidbody>()) // make sure the object has a RigidBody otherwise it isnt a solid object
+            // Checks for a rigidbody
+            if (pickUpObj.GetComponent<Rigidbody>())
             {
-                heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast 
-                heldObjRb = pickUpObj.GetComponent<Rigidbody>(); // give Rigidbody
+                // object we are holding
+                heldObj = pickUpObj;
+                // adds rigidbbody
+                heldObjRb = pickUpObj.GetComponent<Rigidbody>();
+                // disables physics
                 heldObjRb.isKinematic = true;
 
-                
+                // stop the object  going through wall
+                heldObjRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-                heldObj.layer = LayerNumber; //change the object layer to the holdLayer
-                //make sure object doesnt collide with player, it can cause weird bugs
+                // Set layer so it doesn't collide with player
+                heldObj.layer = LayerNumber;
+                //  ignore collisions between object and the player
                 Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
             }
         }
@@ -87,7 +94,7 @@ namespace SteathyPineapple.MissionSystem
         {
             //keep object position the same as the holdPosition position
             heldObj.transform.position = holdPos.transform.position;
-            // NOTE: Do NOT set rotation here, as RotateObject handles it.
+            // Do NOT set rotation here, as RotateObject handles it. and the object bugs out for some reason??
         }
 
         void RotateObject()
@@ -119,13 +126,19 @@ namespace SteathyPineapple.MissionSystem
             }
         }
 
-        void ThrowObject() // Literally the drop function but add force.
+        void ThrowObject()
         {
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
             heldObj.layer = 0;
             heldObjRb.isKinematic = false;
             heldObj.transform.parent = null;
-            heldObjRb.AddForce(transform.forward * throwForce);
+
+            heldObjRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+
+            if (continuousAcceleration > 0)
+            {
+                heldObjRb.AddForce(transform.forward * continuousAcceleration, ForceMode.Acceleration);
+            }
             heldObj = null;
         }
 
