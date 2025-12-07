@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
 
     public Transform player;
 
-    public LayerMask whatIsGround, whatIsPlayer; // whatIsGround = default layer, whatIsPlayer = POI (placeholder) layer
+    public LayerMask whatIsGround, whatIsPlayer; // whatIsGround = default layer, whatIsPlayer = layer of PlayerCapsule
 
 
     // PATROLING
