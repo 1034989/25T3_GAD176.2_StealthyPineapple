@@ -5,8 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - CinemachineTarget
+<<<<<<< HEAD
   - ShopSelection
   - Shopkeeper
+=======
+  - canPickUp
+>>>>>>> 78f6673 (Grab/Throw Command for Mission Complete)
   layers:
   - Default
   - TransparentFX
@@ -14,7 +18,7 @@ TagManager:
   - POI
   - Water
   - UI
-  - 
+  - holdLayer
   - 
   - 
   - 
