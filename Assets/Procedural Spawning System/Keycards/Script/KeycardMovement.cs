@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KeycardMovement : MonoBehaviour
 {
-    public float rotationSpeed = 25f;
+    public float rotationSpeed = 45f;
     public float floatHeight = 0.5f;
     public float floatSpeed = 1f;
 
@@ -16,15 +16,17 @@ public class KeycardMovement : MonoBehaviour
     void Update()
     {
         
-        // Define a rotation axis 
+        // Defining a rotation axis 
         Vector3 axis = new Vector3(0, 1, 0);
-        axis = axis.normalized; // this ensures the Keycard's unit length
+
+        // this ensures the Keycard's unit length
+        axis = axis.normalized; 
 
         // Rotating the Keycard
         transform.Rotate(axis, rotationSpeed * Time.deltaTime);
 
         
-        // Create a normalized "up" vector
+        // Created a normalized "up" vector
         Vector3 upDir = Vector3.up.normalized;
 
         // Scaling the "up" vector by a varying magnitude
