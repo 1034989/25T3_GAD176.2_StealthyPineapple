@@ -17,7 +17,6 @@ public class KeycardSpawnerFrameWork : MonoBehaviour
 
     void Start()
     {
-
         SpawnKeycards();
     }
 

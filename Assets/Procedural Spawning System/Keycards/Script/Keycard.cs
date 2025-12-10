@@ -3,30 +3,33 @@ using UnityEngine;
 
 public class Keycard : KeycardParent
 {
-    // Unique ID or type for this keycard
+    [SerializeField]
+    private bool isPickedUp = false;
+
+    [SerializeField]
     public string keycardID;
 
-    private void OnTriggerEnter(Collider other)
+    // Method called when the keycard is picked up
+    public void PickUp()
     {
-        // Check if the player collected the keycard
-        if (other.CompareTag("Player"))
+        if (!isPickedUp)
         {
-            // Add keycard to player's inventory
-            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
-            if (inventory != null)
-            {
-                inventory.AddKeycard(keycardID);
-            }
+            isPickedUp = true;
 
             GateUnlock();
+
+            
         }
     }
 
+
     public override void GateUnlock()
     {
-        Debug.Log("Player has picked up" +  keycardID);
+        Debug.Log("Collected Keycard: " + keycardID);
         // Destroy keycard object after pickup
         Destroy(gameObject);
 
     }
+
+
 }
