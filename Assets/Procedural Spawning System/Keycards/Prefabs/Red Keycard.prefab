@@ -250,3 +250,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickedUp: 0
   keycardID: Red Keycard
+  Gate: {fileID: 3050309509741158512, guid: dde9a529efb74204f82d36f41057b689, type: 3}

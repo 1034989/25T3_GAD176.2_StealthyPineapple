@@ -250,3 +250,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickedUp: 0
   keycardID: Orange Keycard
+  Gate: {fileID: 3026523562342191483, guid: 33bd3d3d657626e40abf1a1c9e46a128, type: 3}

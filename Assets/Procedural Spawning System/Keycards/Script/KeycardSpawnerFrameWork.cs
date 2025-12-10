@@ -36,6 +36,8 @@ public class KeycardSpawnerFrameWork : MonoBehaviour
         }
     }
 
+    
+    
     //How to Use
     //Create Spawn Points:
     //Add empty GameObjects in your scene where you want the keycards to possibly appear.
