@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using Keycards;
+using StealthyPineapple.Keycards;
 
 public class PlayerInventory : MonoBehaviour
 {

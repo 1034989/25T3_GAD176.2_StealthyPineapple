@@ -3,11 +3,19 @@ using UnityEngine;
 public class KeycardSpawnerFrameWork : MonoBehaviour
 {
 
+    /// <summary>
+    /// the reason as to why i wanted minimum and maximum keycards to spawn in a spawn point so that if other people were to use project as a framework 
+    /// they can use this and edit it however they wished to spawn whatever they want
+    /// i also left some instruction below the code
+    /// </summary>
+
     // Array of possible spawn points (assign in Inspector)
     public Transform[] spawnPoints;
 
     // The keycard prefab to spawn (assign in Inspector)
     public GameObject keycardPrefab;
+
+    public GameObject gateGameObject;
 
     // Minimum and maximum number of keycards to spawn
     public int minKeycards = 1;
@@ -32,7 +40,8 @@ public class KeycardSpawnerFrameWork : MonoBehaviour
             Transform spawnPoint = spawnPoints[randomIndex];
 
             // this spawns the keycard at the chosen position and rotation
-            Instantiate(keycardPrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject newkeycard = Instantiate(keycardPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
+            newkeycard.GetComponent<Keycard>().Gate = gateGameObject;
         }
     }
 

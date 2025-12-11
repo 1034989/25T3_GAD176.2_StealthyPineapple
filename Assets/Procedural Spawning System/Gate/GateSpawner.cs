@@ -1,5 +1,5 @@
 using UnityEngine;
-using Keycards;
+using StealthyPineapple.Keycards;
 
 public class GateSpawner : MonoBehaviour
 {

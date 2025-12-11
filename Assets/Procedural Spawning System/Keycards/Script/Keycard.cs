@@ -1,4 +1,5 @@
-using Keycards;
+using StealthyPineapple.Keycards;
+using System;
 using UnityEngine;
 
 public class Keycard : KeycardParent
@@ -38,4 +39,6 @@ public class Keycard : KeycardParent
         Gate.SetActive(false);
         Debug.Log("the gate has disappeared!!");
     }
+
+    
 }

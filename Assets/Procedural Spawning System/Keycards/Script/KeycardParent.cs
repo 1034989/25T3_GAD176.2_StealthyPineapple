@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Keycards
+namespace StealthyPineapple.Keycards
 {
 public class KeycardParent : MonoBehaviour
 {
